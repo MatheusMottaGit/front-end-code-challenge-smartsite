@@ -1,19 +1,14 @@
 import logo from './assets/logo.svg'
 import { Card, CardContent, CardTitle } from './components/ui/card'
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { Label } from '@radix-ui/react-label'
 import { RadioGroup, RadioGroupItem } from './components/ui/radio-group'
 import { Button } from './components/ui/button'
 import FormCardLayout from './components/form-card-layout'
+import { Period, Unit } from './types/types'
+import axios from 'axios'
 
-type Period = {
-  id: string
-  period: string
-  hours: string
-  value: PeriodsValues
-}
-
-type PeriodsValues = "morning" | "afternoon" | "night"
+export type PeriodsValues = "morning" | "afternoon" | "night"
 
 const periods: Period[] = [
   {
@@ -38,9 +33,30 @@ const periods: Period[] = [
 
 export function App() {
   const [period, setPeriod] = useState<PeriodsValues | null>(null)
+  const [units, setUnits] = useState<Unit[]>([])
 
   function onPeriodChange(value: PeriodsValues) {
     setPeriod(value)
+  }
+
+  async function fetchUnits(event: FormEvent) {
+    event.preventDefault()
+
+    const response = await axios.get('https://test-frontend-developer.s3.amazonaws.com/data/locations.json') //baseUrl on file: lib/axios.ts
+    const data: Unit[] = await response.data.locations
+
+    // switch (period) {
+    //   case 'morning':
+    //     const morningUnits = data.filter(unit => unit.schedules[1].startsWith('0'))
+    //     setUnits(morningUnits)
+    //     break;
+
+    //   case 'afternoon': 
+    //     const afternoonUnits = data.filter(unit => unit.)
+
+    //   default: 'defina um horário'
+    //     break;
+    // }
   }
 
   return (
@@ -57,7 +73,7 @@ export function App() {
         <CardContent className='space-y-4 pb-0'>
           <h2 className='text-2xl text-light-grey'>Qual período quer treinar?</h2>
 
-          <form className='space-y-5'>
+          <form onSubmit={fetchUnits} className='space-y-5'>
             {periods.map(period => {
               return (
                 <RadioGroup key={period.id} className='space-y-2 text-light-grey'>
@@ -82,7 +98,7 @@ export function App() {
             })}
 
             <div className='flex items-center gap-3 flex-1'>
-              <Button className='bg-yellow text-black uppercase font-bold w-full'>
+              <Button type='submit' className='bg-yellow text-black uppercase font-bold w-full'>
                 Encontrar unidade
               </Button>
 
@@ -93,6 +109,16 @@ export function App() {
           </form>
         </CardContent>
       </FormCardLayout>
+
+      {units.map(unit => {
+        return (
+          <p>{unit.title}</p>
+        )
+      })}
+
+      <footer className='bg-zinc-800 p-2'>
+
+      </footer>
     </main>
   )
 }
