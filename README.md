@@ -62,3 +62,13 @@
 - Travis CI
 - App em produção (Ex.: Heroku, Vercel e etc...)
 - Rodando com Docker localmente
+
+// import requiredMask from './assets/required-mask.png'
+// import recommendedMask from './assets/recommended-mask.png'
+// import requiredTowel from './assets/required-towel.png'
+// import recommendedTowel from './assets/recommended-towel.png'
+// import partialFountain from './assets/partial-fountain.png'
+// import forbiddenFountain from './assets/forbidden-fountain.png'
+// import requiredLockroom from './assets/required-lockerroom.png'
+// import partialLockroom from './assets/partial-lockerroom.png'
+// import forbiddenLockroom from './assets/forbidden-lockerroom.png'
