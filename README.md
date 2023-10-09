@@ -1,27 +1,64 @@
-# React + TypeScript + Vite
+# Front-end Smart Fit
+> Esse é um pequeno projeto criado como base para a avaliação de habilidades técnicas para o papel de Front-end (utilizando ReacJS com Vite).
+> Para rodar na sua máquina, basta executar no arquivo do projeto: "npm i", e logo em seguida, "npm run dev".
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Preview
 
-Currently, two official plugins are available:
+![preview](preview.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Proposta de Teste
+> A Smart Fit, por atuar no segmento de fitness, passou por várias mudanças na pandemia. Foi necessário desenvolver uma página para buscar unidades **fechadas** ou **abertas** para consulta e reserva.
 
-## Expanding the ESLint configuration
+> Optamos por não disponibilizar a API de buscas de unidades abertas/fechadas original para esse teste.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+> Nesse teste você implementará as funcionalidades descritas abaixos. Tenha atenção com as regras de negócios definidas mais adiante.
 
-- Configure the top-level `parserOptions` property like this:
+> Lembre-se de **seguir o layout proposto** em _material.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+> Caso não consiga concluir todas as funcionalidade, lembre-se que o mais importante é termos noção da qualidade do código e de suas habilidades para projeto de sistemas. Nesse caso, complemente sua solução com comentários e documentação sobre como terminaria o teste.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Funcionalidades
+- Carrega unidades através do arquivo json `https://test-frontend-developer.s3.amazonaws.com/data/locations.json` com method `GET`
+- Busca todas as unidades
+- Busca unidades com filtros
+- Mostra previsão de resultados encontrados
+- Mostra unidades ao buscar
+
+### Regras de negócio
+- Filtrar unidades abertas ou fechadas
+- Filtrar unidades por período de funcionamento
+- Caso não encontre unidades, mostrar uma menssagem ao usuário "Nenhuma unidade encontrada"
+- Validar para mostrar ícones corretos de acordo com o status
+
+### Componentes Macro
+- Formulário de busca com filtros
+- Legenda
+- Lista de unidades
+
+### Materiais disponíveis
+> Em `./_material` você encontra:
+- layout (mobile e desktop)
+- Textos
+- Cores
+- imagens
+- fonts
+
+# Entrega
+> No seu github, crie um repositório público com o teste e nos envie (caso queira enviar a url do app funcionando no Heroku, vercel ou equivalente seria um plus)
+
+> Não faça Pull Request para esse repositório.
+
+### Avaliação
+- Instruções no README.md
+- Lógica de programação
+- Qualidade de código
+- Qualidade de entrega (como se fosse para produção)
+- Fidelidade ao layout proposto
+- Responsive design
+- cross browser and device (mobile, tablet e desktop)
+
+> Plus
+- Teste unitário e e2e (teste apenas o que achar mais importante).
+- Travis CI
+- App em produção (Ex.: Heroku, Vercel e etc...)
+- Rodando com Docker localmente
