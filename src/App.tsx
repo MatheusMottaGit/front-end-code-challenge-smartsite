@@ -5,8 +5,9 @@ import { Label } from '@radix-ui/react-label'
 import { RadioGroup, RadioGroupItem } from './components/ui/radio-group'
 import { Button } from './components/ui/button'
 import FormCardLayout from './components/form-card-layout'
-import { Period, Unit } from './types/types'
+import { Period, Location } from './types/types'
 import axios from 'axios'
+import { transformDate } from './lib/transform-date'
 
 export type PeriodsValues = "morning" | "afternoon" | "night"
 
@@ -31,9 +32,24 @@ const periods: Period[] = [
   }
 ]
 
+const OPENING_HOURS = {
+  morning: {
+    first: '06',
+    last: '12'
+  },
+  afternoon: {
+    first: '12',
+    last: '18'
+  },
+  night: {
+    first: '18',
+    last: '23'
+  }
+}
+
 export function App() {
   const [period, setPeriod] = useState<PeriodsValues | null>(null)
-  const [units, setUnits] = useState<Unit[]>([])
+  const [units, setUnits] = useState<Location[]>([])
 
   function onPeriodChange(value: PeriodsValues) {
     setPeriod(value)
@@ -43,16 +59,23 @@ export function App() {
     event.preventDefault()
 
     const response = await axios.get('https://test-frontend-developer.s3.amazonaws.com/data/locations.json') //baseUrl on file: lib/axios.ts
-    const data: Unit[] = await response.data.locations
+    const data: Location[] = await response.data.locations
+    setUnits(data)
+    console.log(data)
 
     // switch (period) {
     //   case 'morning':
-    //     const morningUnits = data.filter(unit => unit.schedules[1].startsWith('0'))
+    //     const today = transformDate(new Date().getDay())
+
+    //     const morningUnits = data.filter(data => data.schedules[0].hour === "12h às 19h")
     //     setUnits(morningUnits)
     //     break;
 
-    //   case 'afternoon': 
-    //     const afternoonUnits = data.filter(unit => unit.)
+    //   case 'afternoon':
+    //     break;
+
+    //   case 'night':
+    //     break;
 
     //   default: 'defina um horário'
     //     break;
@@ -110,15 +133,11 @@ export function App() {
         </CardContent>
       </FormCardLayout>
 
-      {units.map(unit => {
+      {/* {units.map(unit => {
         return (
           <p>{unit.title}</p>
         )
-      })}
-
-      <footer className='bg-zinc-800 p-2'>
-
-      </footer>
+      })} */}
     </main>
   )
 }
